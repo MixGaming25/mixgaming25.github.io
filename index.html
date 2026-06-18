@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#05080f" />
+    <meta
+      name="description"
+      content="mix - personal profile, social links, Discord presence, Steam status, music, and ask me anything."
+    />
+
+    <meta property="og:title" content="mix" />
+    <meta
+      property="og:description"
+      content="A minimalist dark profile page with blue cyber accents."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/og-image.svg" />
+    <meta property="og:url" content="/" />
+
+    <title>mix</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+    <div class="page-shell">
+      <header class="hero" id="top">
+        <p class="hero-kicker">personal profile</p>
+        <h1>mix</h1>
+        <p class="hero-subtitle">minimal signals, live status, music, and links.</p>
+      </header>
+
+      <main>
+        <section class="section reveal" id="about" aria-labelledby="about-title">
+          <div class="section-heading">
+            <h2 id="about-title">About</h2>
+          </div>
+          <article class="profile-card">
+            <p>
+              Hey, I am <strong>mix</strong>. This page is built to be easy to edit:
+              update the text here, adjust the social links below, and drop your API
+              values into <code>script.js</code>.
+            </p>
+            <p>
+              Dark UI, light blue accents, clean cards, and live status panels for the
+              stuff I care about.
+            </p>
+          </article>
+        </section>
+
+        <section class="section reveal" id="socials" aria-labelledby="socials-title">
+          <div class="section-heading">
+            <h2 id="socials-title">Social Links</h2>
+          </div>
+          <div class="social-grid" aria-label="Social links">
+            <a class="social-link" href="https://discord.com/" target="_blank" rel="noreferrer">
+              <span>Discord</span>
+              <small>@mix</small>
+            </a>
+            <a class="social-link" href="https://steamcommunity.com/" target="_blank" rel="noreferrer">
+              <span>Steam</span>
+              <small>profile</small>
+            </a>
+            <a class="social-link" href="https://github.com/" target="_blank" rel="noreferrer">
+              <span>GitHub</span>
+              <small>projects</small>
+            </a>
+            <a class="social-link" href="https://instagram.com/" target="_blank" rel="noreferrer">
+              <span>Instagram</span>
+              <small>photos</small>
+            </a>
+            <a class="social-link" href="mailto:mix@example.com">
+              <span>Email</span>
+              <small>contact</small>
+            </a>
+          </div>
+        </section>
+
+        <section class="section reveal" id="discord" aria-labelledby="discord-title">
+          <div class="section-heading">
+            <h2 id="discord-title">Discord Presence</h2>
+            <p id="discord-updated" class="section-meta">syncing</p>
+          </div>
+          <article class="status-card" id="discord-card" aria-live="polite">
+            <div class="avatar skeleton" aria-hidden="true"></div>
+            <div class="status-content">
+              <div class="skeleton-line wide"></div>
+              <div class="skeleton-line medium"></div>
+              <div class="skeleton-line short"></div>
+            </div>
+          </article>
+        </section>
+
+        <section class="section reveal" id="steam" aria-labelledby="steam-title">
+          <div class="section-heading">
+            <h2 id="steam-title">Steam Status</h2>
+            <p id="steam-updated" class="section-meta">waiting for config</p>
+          </div>
+          <article class="status-card" id="steam-card" aria-live="polite">
+            <div class="avatar skeleton" aria-hidden="true"></div>
+            <div class="status-content">
+              <div class="skeleton-line wide"></div>
+              <div class="skeleton-line medium"></div>
+              <div class="skeleton-line short"></div>
+            </div>
+          </article>
+        </section>
+
+        <section class="section reveal" id="music" aria-labelledby="music-title">
+          <div class="section-heading">
+            <h2 id="music-title">Music</h2>
+            <p id="music-updated" class="section-meta">syncing</p>
+          </div>
+          <article class="music-card" id="music-card" aria-live="polite">
+            <div class="album-art skeleton" aria-hidden="true"></div>
+            <div class="status-content">
+              <div class="skeleton-line wide"></div>
+              <div class="skeleton-line medium"></div>
+              <div class="skeleton-line short"></div>
+            </div>
+          </article>
+        </section>
+
+        <section class="section reveal" id="visitors" aria-labelledby="visitors-title">
+          <div class="section-heading">
+            <h2 id="visitors-title">Visitors</h2>
+          </div>
+          <article class="compact-card visitor-card">
+            <p>Visitor counter support is ready for GitHub Pages.</p>
+            <a
+              class="visitor-badge"
+              href="https://hits.sh/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Visitor counter powered by hits.sh"
+            >
+              <img
+                src="https://hits.sh/github.com/mix/profile.svg?label=visitors&color=38bdf8&labelColor=070b14"
+                alt="Visitor counter"
+                loading="lazy"
+              />
+            </a>
+          </article>
+        </section>
+
+        <section class="section reveal" id="ask" aria-labelledby="ask-title">
+          <div class="section-heading">
+            <h2 id="ask-title">Ask Me Anything</h2>
+          </div>
+          <form
+            class="ask-form"
+            id="ask-form"
+            action="https://formspree.io/f/YOUR_FORMSPREE_ID"
+            method="POST"
+          >
+            <label class="sr-only" for="question">Ask me anything</label>
+            <textarea
+              id="question"
+              name="message"
+              rows="5"
+              maxlength="1200"
+              placeholder="Ask something..."
+              required
+            ></textarea>
+            <input type="hidden" name="page" value="mix profile website" />
+            <div class="form-actions">
+              <p class="form-note">Replace the Formspree endpoint in this form action.</p>
+              <button type="submit" id="ask-submit">Send</button>
+            </div>
+            <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <a href="#top" aria-label="Back to top">mix</a>
+        <span>© 2026</span>
+      </footer>
+    </div>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
