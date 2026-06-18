@@ -468,3 +468,28 @@ function escapeHtml(value) {
 function escapeAttr(value) {
   return escapeHtml(value).replaceAll("`", "&#096;");
 }
+
+// Copy Discord username to clipboard on click
+document.addEventListener("DOMContentLoaded", () => {
+  const discordLink = document.getElementById("discord-link");
+  if (!discordLink) return;
+
+  discordLink.addEventListener("click", () => {
+    const username = "mihailooo.p";
+    
+    navigator.clipboard.writeText(username)
+      .then(() => {
+        // Optional: Provide temporary feedback text
+        const smallTag = discordLink.querySelector("small");
+        const originalText = smallTag.textContent;
+        
+        smallTag.textContent = "Copied!";
+        setTimeout(() => {
+          smallTag.textContent = originalText;
+        }, 2000);
+      })
+      .catch(err => {
+        console.error("Could not copy text: ", err);
+      });
+  });
+});
