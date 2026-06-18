@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="mix profile preview">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="18%" r="70%">
+      <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.34"/>
+      <stop offset="48%" stop-color="#02050a" stop-opacity="0.96"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect x="250" y="156" width="700" height="318" rx="18" fill="#050913" fill-opacity="0.76" stroke="#38bdf8" stroke-opacity="0.28"/>
+  <text x="600" y="305" fill="#f8fcff" font-family="Aptos, Segoe UI, sans-serif" font-size="138" font-weight="300" text-anchor="middle">mix</text>
+  <text x="600" y="366" fill="#8394a7" font-family="Aptos, Segoe UI, sans-serif" font-size="28" font-weight="500" text-anchor="middle">minimal profile · live status · music</text>
+  <path d="M390 410H810" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+</svg>

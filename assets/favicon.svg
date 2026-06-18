@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="mix">
+  <rect width="64" height="64" rx="12" fill="#02050a"/>
+  <text x="9" y="40" fill="#eaf6ff" font-family="Aptos, Segoe UI, sans-serif" font-size="22" font-weight="700">mix</text>
+  <path d="M9 50h46" stroke="#38bdf8" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="51" cy="15" r="4" fill="#38bdf8"/>
+</svg>
