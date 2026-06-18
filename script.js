@@ -7,30 +7,30 @@
   static hosting, so anything placed here can be viewed by visitors.
 */
 const CONFIG = {
-  discordUserId: "",
+  discordUserId: "254235647714263041",
   steam: {
-    apiKey: "",
-    steamId64: "",
+    apiKey: "87DEE5A1241C7647E19CEB29BE528D84",
+    steamId64: "76561198368347466",
     // Steam often blocks browser requests with CORS. A public CORS proxy keeps this
     // GitHub Pages compatible, but you can set this to "" if direct fetch works.
-    corsProxy: "https://api.allorigins.win/raw?url="
+    corsProxy: "https://api.allorigins.win/raw?url=",
   },
   lastfm: {
-    apiKey: "",
-    username: ""
-  }
+    apiKey: "3dbc7971f13452fea66caed91486b1c8",
+    username: "mix2555",
+  },
 };
 
 const REFRESH = {
   discord: 30_000,
-  music: 60_000
+  music: 60_000,
 };
 
 const STATUS_LABELS = {
   online: "Online",
   idle: "Idle",
   dnd: "DND",
-  offline: "Offline"
+  offline: "Offline",
 };
 
 const STEAM_PERSONA_STATES = [
@@ -40,7 +40,7 @@ const STEAM_PERSONA_STATES = [
   "Away",
   "Snooze",
   "Looking to trade",
-  "Looking to play"
+  "Looking to play",
 ];
 
 const $ = (selector) => document.querySelector(selector);
@@ -74,7 +74,7 @@ function initReveal() {
         }
       });
     },
-    { threshold: 0.14 }
+    { threshold: 0.14 },
   );
 
   revealItems.forEach((item) => observer.observe(item));
@@ -93,7 +93,7 @@ function initAskForm() {
     if (form.action.includes("YOUR_FORMSPREE_ID")) {
       setFormMessage(
         "Add your Formspree endpoint to the form action before sending.",
-        "error"
+        "error",
       );
       return;
     }
@@ -106,7 +106,7 @@ function initAskForm() {
       const response = await fetch(form.action, {
         method: "POST",
         body: new FormData(form),
-        headers: { Accept: "application/json" }
+        headers: { Accept: "application/json" },
       });
 
       if (!response.ok) throw new Error("Formspree rejected the message.");
@@ -136,7 +136,7 @@ async function loadDiscordPresence() {
     card.innerHTML = emptyStatusMarkup(
       "Discord not configured",
       "Add your Discord user ID to CONFIG.discordUserId in script.js.",
-      "offline"
+      "offline",
     );
     updated.textContent = "waiting for user id";
     return;
@@ -145,7 +145,7 @@ async function loadDiscordPresence() {
   try {
     const response = await fetch(
       `https://api.lanyard.rest/v1/users/${encodeURIComponent(CONFIG.discordUserId)}`,
-      { cache: "no-store" }
+      { cache: "no-store" },
     );
     const payload = await response.json();
     if (!payload.success) throw new Error("Lanyard returned an error.");
@@ -173,7 +173,7 @@ async function loadDiscordPresence() {
     card.innerHTML = emptyStatusMarkup(
       "Discord unavailable",
       "Presence could not be loaded from Lanyard.",
-      "offline"
+      "offline",
     );
     updated.textContent = "error";
   }
@@ -188,7 +188,7 @@ async function loadSteamStatus() {
     card.innerHTML = emptyStatusMarkup(
       "Steam not configured",
       "Add your Steam Web API key and SteamID64 in script.js.",
-      "offline"
+      "offline",
     );
     updated.textContent = "waiting for api key";
     return;
@@ -196,7 +196,7 @@ async function loadSteamStatus() {
 
   try {
     const steamUrl = new URL(
-      "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/"
+      "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/",
     );
     steamUrl.searchParams.set("key", CONFIG.steam.apiKey);
     steamUrl.searchParams.set("steamids", CONFIG.steam.steamId64);
@@ -232,7 +232,7 @@ async function loadSteamStatus() {
     card.innerHTML = emptyStatusMarkup(
       "Steam unavailable",
       "Steam status could not be loaded. Check the key, SteamID64, and CORS proxy.",
-      "offline"
+      "offline",
     );
     updated.textContent = "error";
   }
@@ -246,7 +246,7 @@ async function loadMusicStatus() {
   if (!CONFIG.lastfm.apiKey || !CONFIG.lastfm.username) {
     card.innerHTML = emptyMusicMarkup(
       "Last.fm not configured",
-      "Add your Last.fm API key and username in script.js."
+      "Add your Last.fm API key and username in script.js.",
     );
     updated.textContent = "waiting for api key";
     return;
@@ -286,7 +286,7 @@ async function loadMusicStatus() {
   } catch (error) {
     card.innerHTML = emptyMusicMarkup(
       "Music unavailable",
-      "Last.fm data could not be loaded right now."
+      "Last.fm data could not be loaded right now.",
     );
     updated.textContent = "error";
   }
@@ -297,7 +297,9 @@ function initParticles() {
   if (!canvas) return;
 
   const context = canvas.getContext("2d");
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
   let width = 0;
   let height = 0;
   let particles = [];
@@ -314,7 +316,9 @@ function initParticles() {
     context.setTransform(ratio, 0, 0, ratio, 0, 0);
 
     const count = Math.max(26, Math.min(72, Math.floor(width / 18)));
-    particles = Array.from({ length: count }, () => createParticle(width, height));
+    particles = Array.from({ length: count }, () =>
+      createParticle(width, height),
+    );
   };
 
   const draw = () => {
@@ -362,7 +366,7 @@ function createParticle(width, height) {
     vx: (Math.random() - 0.5) * 0.16,
     vy: (Math.random() - 0.5) * 0.16,
     radius: Math.random() * 1.5 + 0.4,
-    alpha: Math.random() * 0.35 + 0.08
+    alpha: Math.random() * 0.35 + 0.08,
   };
 }
 
@@ -415,9 +419,7 @@ function getDiscordGame(activities = []) {
 }
 
 function getLargestLastfmImage(images = []) {
-  const validImages = images
-    .map((image) => image["#text"])
-    .filter(Boolean);
+  const validImages = images.map((image) => image["#text"]).filter(Boolean);
   return validImages.at(-1) || "";
 }
 
@@ -450,7 +452,7 @@ function emptyMusicMarkup(title, detail) {
 function timeStamp() {
   return new Intl.DateTimeFormat(undefined, {
     hour: "numeric",
-    minute: "2-digit"
+    minute: "2-digit",
   }).format(new Date());
 }
 
