@@ -13,7 +13,7 @@ const CONFIG = {
     steamId64: "76561198368347466",
     // Steam often blocks browser requests with CORS. A public CORS proxy keeps this
     // GitHub Pages compatible, but you can set this to "" if direct fetch works.
-    corsProxy: "https://corsproxy.io/?",
+    corsProxy: "https://cors-anywhere.herokuapp.com/",
   },
   lastfm: {
     apiKey: "3dbc7971f13452fea66caed91486b1c8",
