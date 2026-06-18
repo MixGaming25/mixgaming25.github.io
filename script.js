@@ -13,7 +13,7 @@ const CONFIG = {
     steamId64: "76561198368347466",
     // Steam often blocks browser requests with CORS. A public CORS proxy keeps this
     // GitHub Pages compatible, but you can set this to "" if direct fetch works.
-    corsProxy: "https://cors-anywhere.herokuapp.com/",
+    corsProxy: "https://corsproxy.io/?",
   },
   lastfm: {
     apiKey: "3dbc7971f13452fea66caed91486b1c8",
@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initParticles();
   initReveal();
   initAskForm();
+  initDiscordCopy();
   loadDiscordPresence();
   loadSteamStatus();
   loadMusicStatus();
@@ -127,6 +128,32 @@ function initAskForm() {
   }
 }
 
+// Copy Discord username to clipboard on click
+function initDiscordCopy() {
+  const discordLink = document.getElementById("discord-link");
+  if (!discordLink) return;
+
+  discordLink.addEventListener("click", () => {
+    const username = "mihailooo.p";
+    
+    navigator.clipboard.writeText(username)
+      .then(() => {
+        const smallTag = discordLink.querySelector("small");
+        if (!smallTag) return;
+        
+        const originalText = smallTag.textContent;
+        smallTag.textContent = "Copied!";
+        
+        setTimeout(() => {
+          smallTag.textContent = originalText;
+        }, 2000);
+      })
+      .catch(err => {
+        console.error("Could not copy text: ", err);
+      });
+  });
+}
+
 async function loadDiscordPresence() {
   const card = $("#discord-card");
   const updated = $("#discord-updated");
@@ -195,15 +222,11 @@ async function loadSteamStatus() {
   }
 
   try {
-    const steamUrl = new URL(
-      "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/",
-    );
-    steamUrl.searchParams.set("key", CONFIG.steam.apiKey);
-    steamUrl.searchParams.set("steamids", CONFIG.steam.steamId64);
+    const rawSteamUrl = `https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${CONFIG.steam.apiKey}&steamids=${CONFIG.steam.steamId64}`;
 
     const requestUrl = CONFIG.steam.corsProxy
-      ? `${CONFIG.steam.corsProxy}${encodeURIComponent(steamUrl.toString())}`
-      : steamUrl.toString();
+      ? `${CONFIG.steam.corsProxy}${rawSteamUrl}`
+      : rawSteamUrl;
 
     const response = await fetch(requestUrl, { cache: "no-store" });
     const payload = await response.json();
@@ -468,28 +491,3 @@ function escapeHtml(value) {
 function escapeAttr(value) {
   return escapeHtml(value).replaceAll("`", "&#096;");
 }
-
-// Copy Discord username to clipboard on click
-document.addEventListener("DOMContentLoaded", () => {
-  const discordLink = document.getElementById("discord-link");
-  if (!discordLink) return;
-
-  discordLink.addEventListener("click", () => {
-    const username = "mihailooo.p";
-    
-    navigator.clipboard.writeText(username)
-      .then(() => {
-        // Optional: Provide temporary feedback text
-        const smallTag = discordLink.querySelector("small");
-        const originalText = smallTag.textContent;
-        
-        smallTag.textContent = "Copied!";
-        setTimeout(() => {
-          smallTag.textContent = originalText;
-        }, 2000);
-      })
-      .catch(err => {
-        console.error("Could not copy text: ", err);
-      });
-  });
-});
