@@ -9,8 +9,8 @@
 const CONFIG = {
   discordUserId: "254235647714263041",
   steam: {
-    apiKey: "87DEE5A1241C7647E19CEB29BE528D84",
-    steamId64: "76561198368347466",
+    apiKey: "87DEExxxxxxxxxxxxxxx4",
+    steamId64: "765xxxxxxxxxxxxxxx466",
     // Steam often blocks browser requests with CORS. A public CORS proxy keeps this
     // GitHub Pages compatible, but you can set this to "" if direct fetch works.
     corsProxy: "https://corsproxy.io/?",
@@ -253,9 +253,9 @@ async function loadSteamStatus() {
     updated.textContent = `updated ${timeStamp()}`;
   } catch (error) {
     card.innerHTML = emptyStatusMarkup(
-      "Steam unavailable",
+      "Steam - work in progress",
       "Steam status could not be loaded. Check the key, SteamID64, and CORS proxy.",
-      "offline",
+      "offline (lies)",
     );
     updated.textContent = "error";
   }
